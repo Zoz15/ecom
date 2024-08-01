@@ -28,7 +28,6 @@ class NewWidget extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-
 // ====================== Section of slide Under SearchBar ===============
 class Category extends StatefulWidget {
   final Function(String) onback;
@@ -39,7 +38,12 @@ class Category extends StatefulWidget {
 }
 
 class _CategoryState extends State<Category> {
-  final List<String> category = ['All product', 'Desc', 'Category', 'Top 10 limit'];
+  final List<String> category = [
+    'All product',
+    'Desc',
+    'Category',
+    'Top 10 limit'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +51,7 @@ class _CategoryState extends State<Category> {
       children: category.map((cat) {
         return InkWell(
           onTap: () {
+            yoursellect = cat;
             widget.onback(cat);
           },
           child: Padding(
@@ -95,3 +100,8 @@ Padding Section_of_slide_Under_SearchBarStatee(String name_of_section) {
     ),
   );
 }
+
+
+
+
+

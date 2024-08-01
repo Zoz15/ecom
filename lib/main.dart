@@ -2,7 +2,7 @@ import 'package:ecomorse/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp( Home_screen());
+  runApp( HomeScreen());
 }
 // asdfasdf
 

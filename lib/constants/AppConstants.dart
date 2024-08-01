@@ -1,3 +1,5 @@
+import 'package:ecomorse/model/get_all_prodactsJ.dart';
+import 'package:ecomorse/model/get_desc.dart';
 import 'package:flutter/material.dart';
 
 double hightoffiald = 50;
@@ -14,6 +16,10 @@ Color orangelite = Color(0xfff3e5da);
 // String top_10 = ;
 
 String yoursellect = 'All product';
+
+// !================= the list ================
+List<AllProducts> list_of_allProducts = [];
+List<DescProduct> list_of_desc = [];
 
 // ignore: must_be_immutable
 class size extends StatelessWidget {
