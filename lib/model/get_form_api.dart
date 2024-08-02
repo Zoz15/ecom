@@ -47,3 +47,25 @@ Future<List<DescProduct>> funGetDesc() async {
     throw e;
   }
 }
+
+Future<List<String>> funGetCategories() async {
+  try {
+    final response = await http
+        .get(Uri.parse('https://fakestoreapi.com/products/categories'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final categoryList =
+          (data as List<dynamic>).map((item) => item.toString()).toList();
+
+      list_of_Categories = categoryList;
+
+      print(categoryList);
+      return categoryList;
+    } else {
+      throw Exception('Failed to load categories');
+    }
+  } catch (e) {
+    print('Error: $e');
+    throw e;
+  }
+}

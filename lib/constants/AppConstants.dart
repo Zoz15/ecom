@@ -20,6 +20,7 @@ String yoursellect = 'All product';
 // !================= the list ================
 List<AllProducts> list_of_allProducts = [];
 List<DescProduct> list_of_desc = [];
+List<String> list_of_Categories = [];
 
 // ignore: must_be_immutable
 class size extends StatelessWidget {

@@ -10,18 +10,11 @@ class Category extends StatefulWidget {
 class _CategoryState extends State<Category> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Circular Menu Example')),
-      body: Center(
-        child: Container(
-          width: 300,
-          height: 300,
-          color: Colors.grey[200],
-          child: Stack(
-            children: [],
-          ),
-        ),
-      ),
+    return Container(
+      width: 300,
+      height: 300,
+      color: Colors.grey[200],
+      
     );
   }
 }
