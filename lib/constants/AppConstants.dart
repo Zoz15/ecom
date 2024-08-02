@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 
 double hightoffiald = 50;
 double radius = 10;
+
+Color blue = Color(0xff7d99fd);
+Color liteBlue = Color(0xffecf0ff);
+Color black = Color(0xff01030a);
+Color white = Color(0xffffffff);
+
 Color orange = Color(0xfffd7819);
-Color white = Colors.white;
-Color black = Colors.black;
+
 Color orangelite = Color(0xfff3e5da);
 
 //List category = [, 'Dosc', 'Category', 'Top 10 limet'];
@@ -15,7 +20,8 @@ Color orangelite = Color(0xfff3e5da);
 // String category = ;
 // String top_10 = ;
 
-String yoursellect = 'All product';
+String selectedCategory = 'All';
+
 
 // !================= the list ================
 List<AllProducts> list_of_allProducts = [];

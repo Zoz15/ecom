@@ -48,56 +48,57 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Container(
-            width: width / 2 - 20,
-            height: 70,
-            decoration: BoxDecoration(
-              color: white,
-              // image: DecorationImage(
-              //   image: NetworkImage(product.image ?? ''),
-              //   fit: BoxFit.cover,
-              // ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ClipRRect(
-                  child: Image.network(
-                product.image ?? '',
-                fit: BoxFit.contain,
-              )),
+    return Container(
+      padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: liteBlue),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Container(
+              width: width / 2 - 20,
+              height: 70,
+              decoration: BoxDecoration(
+                color: white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ClipRRect(
+                    child: Image.network(
+                  product.image ?? '',
+                  fit: BoxFit.contain,
+                )),
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                product.title ?? '',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.title ?? '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                '\$${product.price?.toStringAsFixed(2) ?? 'N/A'}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w800,
-                  color: Colors.deepOrange,
+                //const SizedBox(height: 4),
+                Text(
+                  '\$${product.price?.toStringAsFixed(1)}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

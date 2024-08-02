@@ -38,12 +38,7 @@ class Category extends StatefulWidget {
 }
 
 class _CategoryState extends State<Category> {
-  final List<String> category = [
-    'All product',
-    'Desc',
-    'Category',
-    'Top 10 limit'
-  ];
+  final List<String> category = ['All', 'Desc', 'Category', 'Top 10 limit'];
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +46,7 @@ class _CategoryState extends State<Category> {
       children: category.map((cat) {
         return InkWell(
           onTap: () {
-            yoursellect = cat;
+            selectedCategory = cat;
             widget.onback(cat);
           },
           child: Padding(
@@ -60,15 +55,18 @@ class _CategoryState extends State<Category> {
               height: 45,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: yoursellect == cat ? orange : orangelite,
+                borderRadius: BorderRadius.circular(20),
+                border: selectedCategory != cat
+                    ? Border.all(color: black)
+                    : Border.all(color: white),
+                color: selectedCategory == cat ? blue : white,
               ),
               duration: const Duration(milliseconds: 500),
               child: Center(
                 child: Text(
                   cat,
                   style: TextStyle(
-                    color: yoursellect == cat ? Colors.white : orange,
+                    color: selectedCategory == cat ? Colors.white : black,
                   ),
                 ),
               ),
@@ -88,20 +86,15 @@ Padding Section_of_slide_Under_SearchBarStatee(String name_of_section) {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: yoursellect == name_of_section ? orange : orangelite,
+        color: selectedCategory == name_of_section ? orange : orangelite,
       ),
       duration: const Duration(milliseconds: 500),
       child: Center(
           child: Text(
         name_of_section,
-        style:
-            TextStyle(color: yoursellect == name_of_section ? white : orange),
+        style: TextStyle(
+            color: selectedCategory == name_of_section ? white : orange),
       )),
     ),
   );
 }
-
-
-
-
-
