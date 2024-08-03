@@ -1,4 +1,5 @@
 import 'package:ecomorse/Screens/categry/allproduct.dart';
+import 'package:ecomorse/model/get_all_prodactsJ.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/Widget/widget_of_homeScreen.dart';
@@ -6,7 +7,7 @@ import 'package:ecomorse/Screens/categry/desc.dart';
 
 late double height;
 late double width;
-// String selectedCategory = 'sdf';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,6 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
+  void updataSortProduct(String category) {
+    setState(() {
+      selectedCategory = category;
+    });
+  }
+
   void updateSelectedCategory(String category) {
     setState(() {
       selectedCategory = category;
@@ -30,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SafeArea(
           child: Column(
             children: [
-              Explore_frist_think_in_app(),
+              Explore_frist_think_in_app(
+                onback: updataSortProduct,
+              ),
               //SearchBar(width),
               //              ? botton next to search bar
               Expanded(
@@ -49,21 +59,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     Expanded(
                       child: selectedCategory == 'All'
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 15, left: 15),
-                              child: AllProductWidget(),
-                            )
-                          : selectedCategory == 'Desc'
-                              ? const Padding(
+                          ? sortState
+                              ?  const Padding(
                                   padding: EdgeInsets.only(right: 15, left: 15),
                                   child: Desc(),
                                 )
-                              : Container(
-                                  height: 100,
-                                  width: 100,
-                                  color: orange,
-                                ),
+                              :  Padding(
+                                  padding: const EdgeInsets.only(right: 15, left: 15),
+                                  child: AllProductWidget(),
+                                )
+                          : Container(
+                              height: 100,
+                              width: 100,
+                              color: orange,
+                            ),
                     ),
                   ],
                 ),
@@ -137,7 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class Explore_frist_think_in_app extends StatefulWidget {
+  Function(String) onback;
   Explore_frist_think_in_app({
+    required this.onback,
     super.key,
   });
 
@@ -148,7 +159,7 @@ class Explore_frist_think_in_app extends StatefulWidget {
 
 class _Explore_frist_think_in_appState
     extends State<Explore_frist_think_in_app> {
-  IconData theicon = Icons.arrow_upward_outlined;
+  IconData theicon = Icons.arrow_downward_outlined;
 
   @override
   Widget build(BuildContext context) {
@@ -206,10 +217,15 @@ class _Explore_frist_think_in_appState
                 ? IconButton(
                     onPressed: () {
                       setState(() {
-                        theicon == Icons.arrow_upward_outlined
-                            ? theicon = Icons.arrow_downward_outlined
-                            : theicon = Icons.arrow_upward_outlined;
+                        if (theicon == Icons.arrow_upward_outlined) {
+                          sortState = true;
+                          theicon = Icons.arrow_downward_outlined;
+                        } else {
+                          sortState = false;
+                          theicon = Icons.arrow_upward_outlined;
+                        }
                       });
+                      widget.onback(selectedCategory); 
                     },
                     icon: Icon(theicon))
                 : const SizedBox(

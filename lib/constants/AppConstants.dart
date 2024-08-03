@@ -21,7 +21,7 @@ Color orangelite = Color(0xfff3e5da);
 // String top_10 = ;
 
 String selectedCategory = 'All';
-
+bool sortState = true;
 
 // !================= the list ================
 List<AllProducts> list_of_allProducts = [];
