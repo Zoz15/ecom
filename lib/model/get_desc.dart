@@ -21,9 +21,9 @@ class DescProduct {
     return DescProduct(
       id: json['id'],
       title: json['title'],
-      price: (json['price'] as num?)?.toDouble(),  // Convert to double
+      price: (json['price'] as num?)?.toDouble(), // Convert to double
       description: json['description'],
-      category: json['category'],
+      category: json['Anther'],
       image: json['image'],
       rating: json['rating'] != null ? Rating.fromJson(json['rating']) : null,
     );
@@ -35,7 +35,7 @@ class DescProduct {
     data['title'] = this.title;
     data['price'] = this.price;
     data['description'] = this.description;
-    data['category'] = this.category;
+    data['Anther'] = this.category;
     data['image'] = this.image;
     if (this.rating != null) {
       data['rating'] = this.rating!.toJson();
@@ -52,7 +52,7 @@ class Rating {
 
   factory Rating.fromJson(Map<String, dynamic> json) {
     return Rating(
-      rate: (json['rate'] as num?)?.toDouble(),  // Convert to double
+      rate: (json['rate'] as num?)?.toDouble(), // Convert to double
       count: json['count'],
     );
   }

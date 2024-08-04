@@ -1,5 +1,5 @@
 import 'package:ecomorse/Screens/categry/allproduct.dart';
-import 'package:ecomorse/model/get_all_prodactsJ.dart';
+import 'package:ecomorse/Screens/categry/categroy.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/Widget/widget_of_homeScreen.dart';
@@ -8,14 +8,12 @@ import 'package:ecomorse/Screens/categry/desc.dart';
 late double height;
 late double width;
 
-
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
   void updataSortProduct(String category) {
     setState(() {
       selectedCategory = category;
@@ -47,12 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Category(
-                          onback: updateSelectedCategory,
-                        ),
+                      padding: const EdgeInsets.all(15),
+                      child: CategoryBar(
+                        onback: updateSelectedCategory,
                       ),
                     ),
                     //               ? contaner have radius only top
@@ -60,19 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: selectedCategory == 'All'
                           ? sortState
-                              ?  const Padding(
-                                  padding: EdgeInsets.only(right: 15, left: 15),
-                                  child: Desc(),
-                                )
-                              :  Padding(
-                                  padding: const EdgeInsets.only(right: 15, left: 15),
-                                  child: AllProductWidget(),
-                                )
-                          : Container(
-                              height: 100,
-                              width: 100,
-                              color: orange,
-                            ),
+                              ? const Desc()
+                              : AllProductWidget()
+                          : selectedCategory == 'Anther'
+                              ? Category(onSelected: updataSortProduct)
+                              : Container(),
                     ),
                   ],
                 ),
@@ -145,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // }
 }
 
+// ignore: must_be_immutable
 class Explore_frist_think_in_app extends StatefulWidget {
   Function(String) onback;
   Explore_frist_think_in_app({
@@ -225,7 +213,7 @@ class _Explore_frist_think_in_appState
                           theicon = Icons.arrow_upward_outlined;
                         }
                       });
-                      widget.onback(selectedCategory); 
+                      widget.onback(selectedCategory);
                     },
                     icon: Icon(theicon))
                 : const SizedBox(

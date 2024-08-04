@@ -6,37 +6,40 @@ import 'package:flutter/material.dart';
 
 // ============================== all procuct page =========================
 Widget AllProductWidget() {
-  return FutureBuilder(
-    future: fetchAllProducts(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(child: CircularProgressIndicator());
-      } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
-      } else if (!snapshot.hasData || snapshot.data == null) {
-        return const Expanded(
-            child: Center(child: Text('No products available')));
-      } else {
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 2 / 3,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 12,
-          ),
-          itemCount: list_of_allProducts.length,
-          itemBuilder: (context, index) {
-            final product = list_of_allProducts[index];
-            return InkWell(
-              onTap: () {
-                // Navigate to detail screen
-              },
-              child: ProductCard(product: product),
-            );
-          },
-        );
-      }
-    },
+  return Padding(
+    padding: const EdgeInsets.only(right: 15, left: 15),
+    child: FutureBuilder(
+      future: fetchAllProducts(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data == null) {
+          return const Expanded(
+              child: Center(child: Text('No products available')));
+        } else {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 2 / 3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 12,
+            ),
+            itemCount: list_of_allProducts.length,
+            itemBuilder: (context, index) {
+              final product = list_of_allProducts[index];
+              return InkWell(
+                onTap: () {
+                  // Navigate to detail screen
+                },
+                child: ProductCard(product: product),
+              );
+            },
+          );
+        }
+      },
+    ),
   );
 }
 
