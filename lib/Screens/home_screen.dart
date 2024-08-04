@@ -1,5 +1,6 @@
 import 'package:ecomorse/Screens/categry/allproduct.dart';
 import 'package:ecomorse/Screens/categry/categroy.dart';
+import 'package:ecomorse/Screens/categry/man_woman.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/Widget/widget_of_homeScreen.dart';
@@ -9,6 +10,8 @@ late double height;
 late double width;
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -36,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SafeArea(
           child: Column(
             children: [
-              Explore_frist_think_in_app(
+              ExploreFristThinkInApp(
                 onback: updataSortProduct,
               ),
               //SearchBar(width),
@@ -53,14 +56,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     //               ? contaner have radius only top
 
                     Expanded(
-                      child: selectedCategory == 'All'
-                          ? sortState
-                              ? const Desc()
-                              : AllProductWidget()
-                          : selectedCategory == 'Anther'
-                              ? Category(onSelected: updataSortProduct)
-                              : Container(),
-                    ),
+                        child: selectedCategory == 'All'
+                            ? sortState
+                                ? const Desc()
+                                : allProductWidget()
+                            : selectedCategory == 'Other'
+                                ? Category(onSelected: updataSortProduct)
+                                : selectedCategory == 'Man'
+                                    ? ManWomen(
+                                        onSelected: updataSortProduct,
+                                        isman: true,
+                                      )
+                                    : selectedCategory == 'Women'
+                                        ? ManWomen(
+                                            onSelected: updataSortProduct,
+                                            isman: false,
+                                          )
+                                        : Container()),
                   ],
                 ),
               ),
@@ -133,20 +145,18 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 // ignore: must_be_immutable
-class Explore_frist_think_in_app extends StatefulWidget {
+class ExploreFristThinkInApp extends StatefulWidget {
   Function(String) onback;
-  Explore_frist_think_in_app({
+  ExploreFristThinkInApp({
     required this.onback,
     super.key,
   });
 
   @override
-  State<Explore_frist_think_in_app> createState() =>
-      _Explore_frist_think_in_appState();
+  State<ExploreFristThinkInApp> createState() => _ExploreFristThinkInAppState();
 }
 
-class _Explore_frist_think_in_appState
-    extends State<Explore_frist_think_in_app> {
+class _ExploreFristThinkInAppState extends State<ExploreFristThinkInApp> {
   IconData theicon = Icons.arrow_downward_outlined;
 
   @override

@@ -23,7 +23,7 @@ class DescProduct {
       title: json['title'],
       price: (json['price'] as num?)?.toDouble(), // Convert to double
       description: json['description'],
-      category: json['Anther'],
+      category: json['Other'],
       image: json['image'],
       rating: json['rating'] != null ? Rating.fromJson(json['rating']) : null,
     );
@@ -35,7 +35,7 @@ class DescProduct {
     data['title'] = this.title;
     data['price'] = this.price;
     data['description'] = this.description;
-    data['Anther'] = this.category;
+    data['Other'] = this.category;
     data['image'] = this.image;
     if (this.rating != null) {
       data['rating'] = this.rating!.toJson();

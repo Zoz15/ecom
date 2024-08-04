@@ -5,7 +5,7 @@ import 'package:ecomorse/model/get_form_api.dart';
 import 'package:flutter/material.dart';
 
 // ============================== all procuct page =========================
-Widget AllProductWidget() {
+Widget allProductWidget() {
   return Padding(
     padding: const EdgeInsets.only(right: 15, left: 15),
     child: FutureBuilder(
@@ -26,9 +26,9 @@ Widget AllProductWidget() {
               crossAxisSpacing: 10,
               mainAxisSpacing: 12,
             ),
-            itemCount: list_of_allProducts.length,
+            itemCount: listOfAllProducts.length,
             itemBuilder: (context, index) {
-              final product = list_of_allProducts[index];
+              final product = listOfAllProducts[index];
               return InkWell(
                 onTap: () {
                   // Navigate to detail screen
@@ -47,12 +47,12 @@ Widget AllProductWidget() {
 class ProductCard extends StatelessWidget {
   final dynamic product;
 
-  const ProductCard({required this.product});
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: liteBlue),
       child: Column(

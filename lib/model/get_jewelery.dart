@@ -21,7 +21,7 @@ class Jewelery_Electronics {
     title = json['title'] as String?;
     price = (json['price'] as num?)?.toDouble(); // what the fuck 🤬🤬🤬😡
     description = json['description'] as String?;
-    category = json['Anther'] as String?;
+    category = json['Other'] as String?;
     image = json['image'] as String?;
     rating = json['rating'] != null ? Rating.fromJson(json['rating']) : null;
   }
@@ -32,7 +32,7 @@ class Jewelery_Electronics {
     data['title'] = this.title;
     data['price'] = this.price;
     data['description'] = this.description;
-    data['Anther'] = this.category;
+    data['Other'] = this.category;
     data['image'] = this.image;
     if (this.rating != null) {
       data['rating'] = this.rating!.toJson();

@@ -20,7 +20,7 @@ class AllProducts {
     price = json['price'] is int
         ? (json['price'] as int).toDouble()
         : json['price'];
-    category = json['Anther'];
+    category = json['Other'];
     description = json['description'];
     image = json['image'];
   }
@@ -30,7 +30,7 @@ class AllProducts {
     data['id'] = this.id;
     data['title'] = this.title;
     data['price'] = this.price;
-    data['Anther'] = this.category;
+    data['Other'] = this.category;
     data['description'] = this.description;
     data['image'] = this.image;
     return data;

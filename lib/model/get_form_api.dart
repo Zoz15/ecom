@@ -15,7 +15,7 @@ Future<List<AllProducts>> fetchAllProducts() async {
           .map((item) => AllProducts.fromJson(item))
           .toList();
 
-      list_of_allProducts = productList;
+      listOfAllProducts = productList;
 
       return productList;
     } else {
@@ -37,7 +37,7 @@ Future<List<DescProduct>> funGetDesc() async {
           .map((item) => DescProduct.fromJson(item))
           .toList();
 
-      list_of_desc = productList;
+      listOfDesc = productList;
       //print(productList);
       return productList;
     } else {
@@ -58,7 +58,7 @@ Future<List<String>> funGetCategories() async {
       final categoryList =
           (data as List<dynamic>).map((item) => item.toString()).toList();
 
-      list_of_Categories = categoryList;
+      listOfCategories = categoryList;
 
       //print(categoryList);
       return categoryList;
@@ -71,12 +71,16 @@ Future<List<String>> funGetCategories() async {
   }
 }
 
-Future<List<Jewelery_Electronics>> funGetJewelery(bool isjewe) async {
+Future<List<Jewelery_Electronics>> funGetJewelery(String thecategore) async {
   late String x;
-  if (isjewe) {
+  if (thecategore == 'j') {
     x = 'jewelery';
-  } else {
+  } else if (thecategore == 'e') {
     x = 'electronics';
+  } else if (thecategore == 'm') {
+    x = "men's clothing";
+  } else if (thecategore == 'w') {
+    x = "women's clothing";
   }
 
   try {
@@ -88,12 +92,12 @@ Future<List<Jewelery_Electronics>> funGetJewelery(bool isjewe) async {
           .map((item) => Jewelery_Electronics.fromJson(item))
           .toList();
 
-      list_of_jewelery_and_electronics = productList;
+      listOfJeEleMenWomen = productList;
 
-      print(data);
-      print('=================================================\n\n\n\n');
-      print(list_of_jewelery_and_electronics.length);
-      print('=================================================\n\n\n\n');
+      // print(data);
+      // print('=================================================\n\n\n\n');
+      // print(listOfJeEleMenWomen.length);
+      // print('=================================================\n\n\n\n');
 
       //print(productList);
       return productList;

@@ -4,7 +4,7 @@ import 'package:ecomorse/model/get_form_api.dart';
 import 'package:flutter/material.dart';
 
 class Desc extends StatefulWidget {
-  const Desc({Key? key}) : super(key: key);
+  const Desc({super.key});
 
   @override
   State<Desc> createState() => _DescState();
@@ -23,9 +23,7 @@ class _DescState extends State<Desc> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
-          } else
-          
-          {
+          } else {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -33,9 +31,9 @@ class _DescState extends State<Desc> {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               ),
-              itemCount: list_of_desc.length,
+              itemCount: listOfDesc.length,
               itemBuilder: (BuildContext context, int index) {
-                final product = list_of_desc[index];
+                final product = listOfDesc[index];
                 return InkWell(
                   onTap: () {
                     // Navigate to detail screen

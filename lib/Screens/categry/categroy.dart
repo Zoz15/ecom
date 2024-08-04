@@ -63,14 +63,16 @@ class _CategoryState extends State<Category> {
               }).toList(),
             ),
           ),
-          const SizedBox(
-            height: 5,
+          const Size(
+            h: 10,
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(right: 15, left: 15),
               child: FutureBuilder(
-                future: selectedCategoryLevel2 == 'Jewelery' ? funGetJewelery(true): funGetJewelery(false),
+                future: selectedCategoryLevel2 == 'Jewelery'
+                    ? funGetJewelery('j')
+                    : funGetJewelery('e'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -83,9 +85,9 @@ class _CategoryState extends State<Category> {
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
                       ),
-                      itemCount: list_of_jewelery_and_electronics.length,
+                      itemCount: listOfJeEleMenWomen.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final product = list_of_jewelery_and_electronics[index];
+                        final product = listOfJeEleMenWomen[index];
                         return InkWell(
                           onTap: () {
                             // Navigate to detail screen
