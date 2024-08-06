@@ -1,4 +1,5 @@
 import 'package:ecomorse/Screens/categry/allproduct.dart';
+import 'package:ecomorse/Screens/details_screen.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/model/get_form_api.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +91,11 @@ class _CategoryState extends State<Category> {
                         final product = listOfJeEleMenWomen[index];
                         return InkWell(
                           onTap: () {
+                            Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              DetailsScreen(id: product.id!)));
                             // Navigate to detail screen
                           },
                           child: ProductCard(product: product),

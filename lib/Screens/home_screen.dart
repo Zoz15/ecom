@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/Widget/widget_of_homeScreen.dart';
 import 'package:ecomorse/Screens/categry/desc.dart';
+import 'package:iconsax/iconsax.dart';
 
 late double height;
 late double width;
@@ -17,15 +18,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void updataSortProduct(String category) {
+  void updateState(String category) {
     setState(() {
       selectedCategory = category;
     });
   }
 
-  void updateSelectedCategory(String category) {
+  // void updateState(String category) {
+  //   setState(() {
+  //     selectedCategory = category;
+  //   });
+  // }
+  int _selectedIndex = 0;
+
+  static const List<Widget> _pages = <Widget>[
+    Center(child: Text('Home Page')),
+    Center(child: Text('Store Page')),
+    Center(child: Text('Favorite Page')),
+    Center(child: Text('Profile Page')),
+  ];
+  void _onItemTapped(int index) {
     setState(() {
-      selectedCategory = category;
+      _selectedIndex = index;
     });
   }
 
@@ -36,11 +50,37 @@ class _HomeScreenState extends State<HomeScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.home),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.shop),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.heart),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.user),
+              label: '',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: blue,
+          unselectedItemColor: Colors.black54,
+          onTap: _onItemTapped,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+        ),
         body: SafeArea(
           child: Column(
             children: [
               ExploreFristThinkInApp(
-                onback: updataSortProduct,
+                onback: updateState,
               ),
               //SearchBar(width),
               //              ? botton next to search bar
@@ -50,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: const EdgeInsets.all(15),
                       child: CategoryBar(
-                        onback: updateSelectedCategory,
+                        onback: updateState,
                       ),
                     ),
                     //               ? contaner have radius only top
@@ -61,15 +101,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? const Desc()
                                 : allProductWidget()
                             : selectedCategory == 'Other'
-                                ? Category(onSelected: updataSortProduct)
+                                ? Category(onSelected: updateState)
                                 : selectedCategory == 'Man'
                                     ? ManWomen(
-                                        onSelected: updataSortProduct,
+                                        onSelected: updateState,
                                         isman: true,
                                       )
                                     : selectedCategory == 'Women'
                                         ? ManWomen(
-                                            onSelected: updataSortProduct,
+                                            onSelected: updateState,
                                             isman: false,
                                           )
                                         : Container()),
@@ -79,6 +119,28 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+//         BottomNavigationBar(
+//   currentIndex: _currentIndex,
+//   onTap: (index) => setState(() => _currentIndex = index),
+//   items: [
+//     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+//     BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+//   ],
+// ),
+        // drawer: NavigationBar(
+        //   destinations: const [
+        //     NavigationDrawerDestination(icon: Icon(Iconsax.home), label: Text('Home')),
+        //     NavigationDrawerDestination(icon: Icon(Iconsax.shop), label: Text('Store')),
+        //     NavigationDrawerDestination(icon: Icon(Iconsax.heart), label: Text('Favorite')),
+        //     NavigationDrawerDestination(icon: Icon(Iconsax.user), label: Text('Profile')),
+        //   ],
+        //   onDestinationSelected: (value) {
+        //     setState(() {
+
+        //     });
+        //   },
+
+        // ),
       ),
     );
   }

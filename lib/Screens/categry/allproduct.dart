@@ -1,3 +1,4 @@
+import 'package:ecomorse/Screens/details_screen.dart';
 import 'package:ecomorse/Screens/home_screen.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
 // import 'package:ecomorse/model/get_all_prodactsJ.dart';
@@ -31,6 +32,13 @@ Widget allProductWidget() {
               final product = listOfAllProducts[index];
               return InkWell(
                 onTap: () {
+                  print(listOfDetails);
+                  print('--------------------------------------------------------\n\n\n\n\n\n');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              DetailsScreen(id: product.id!)));
                   // Navigate to detail screen
                 },
                 child: ProductCard(product: product),

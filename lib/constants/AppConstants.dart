@@ -1,5 +1,6 @@
 import 'package:ecomorse/model/get_all_prodacts.dart';
 import 'package:ecomorse/model/get_desc.dart';
+import 'package:ecomorse/model/get_details.dart';
 import 'package:ecomorse/model/get_jewelery.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ const Color black = Color(0xff01030a);
 // String top_10 = ;
 
 String selectedCategory = 'All';
+String selectedSize = 'S';
 String selectedCategoryLevel2 = 'Electronics';
 String dropdownValue = '';
 bool sortState = true;
@@ -27,11 +29,19 @@ List<AllProducts> listOfAllProducts = [];
 List<DescProduct> listOfDesc = [];
 List<Jewelery_Electronics> listOfJeEleMenWomen = [];
 List<String> listOfCategories = [];
+List<Details> listOfDetails = [];
 final List<String> category = [
   'All',
   'Man',
   'Women',
   'Other',
+];
+final List<String> listOfSize = [
+  'S',
+  'M',
+  'L',
+  'XL',
+  'XXL',
 ];
 final List<String> electronicsandjewelery = ['Electronics', 'Jewelery'];
 
