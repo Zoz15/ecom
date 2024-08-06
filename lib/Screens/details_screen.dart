@@ -1,31 +1,32 @@
-import 'package:ecomorse/Screens/home_screen.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
+import 'package:ecomorse/main.dart';
 import 'package:ecomorse/model/get_form_api.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'dart:math';
 
+// ignore: must_be_immutable
 class DetailsScreen extends StatelessWidget {
   int id;
   DetailsScreen({super.key, required this.id});
 
   int getRandomInt() {
-    int _randomNumber = 0;
+    int randomNumber = 0;
     Random random = Random();
     var min = 100;
     var max = 900;
-    _randomNumber = min + random.nextInt(max - min);
-    return _randomNumber;
+    randomNumber = min + random.nextInt(max - min);
+    return randomNumber;
   }
 
   int getRandomIntPrice() {
-    int _randomNumber = 0;
+    int randomNumber = 0;
     Random random = Random();
     var min = 9;
     var max = 20;
-    _randomNumber = min + random.nextInt(max - min);
-    return _randomNumber;
+    randomNumber = min + random.nextInt(max - min);
+    return randomNumber;
   }
 
   @override
@@ -52,14 +53,17 @@ class DetailsScreen extends StatelessWidget {
                   children: [
                     Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+                            borderRadius: BorderRadius.circular(20),
+                            color: white),
                         width: double.infinity,
                         height: (height / 2) - 25,
-                        child: ClipRRect(
-                          child: Image.network(
-                            listOfDetails[0].image!,
-                            fit: BoxFit.cover,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ClipRRect(
+                            child: Image.network(
+                              listOfDetails[0].image!,
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         )),
                     const Size(h: 5),
@@ -103,7 +107,7 @@ class DetailsScreen extends StatelessWidget {
                     const Size(
                       h: 10,
                     ),
-                    SizedBox(width: 180, child: ColorSelection()),
+                    const SizedBox(width: 180, child: ColorSelection()),
                     const Size(h: 12),
                     const Text(
                       'Select Size',
@@ -186,7 +190,10 @@ class DetailsScreen extends StatelessWidget {
 }
 
 class ColorSelection extends StatefulWidget {
+  const ColorSelection({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ColorSelectionState createState() => _ColorSelectionState();
 }
 
@@ -194,11 +201,11 @@ class _ColorSelectionState extends State<ColorSelection> {
   int selectedIndex = -1; // No color selected
 
   final List colors = [
-    Color(0xff51c51c),
-    Color(0xff7a0808),
+    const Color(0xff51c51c),
+    const Color(0xff7a0808),
     black,
-    Color.fromARGB(255, 236, 236, 236),
-    Color(0xff1510db),
+    const Color.fromARGB(255, 236, 236, 236),
+    const Color(0xff1510db),
 
     // Colors.green,
     // const Color.fromARGB(255, 214, 89, 67),
@@ -250,9 +257,10 @@ class _ColorSelectionState extends State<ColorSelection> {
 class ReadMoreText extends StatefulWidget {
   final String text;
 
-  ReadMoreText({required this.text});
+  const ReadMoreText({super.key, required this.text});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ReadMoreTextState createState() => _ReadMoreTextState();
 }
 
@@ -282,11 +290,11 @@ class _ReadMoreTextState extends State<ReadMoreText> {
         children: [
           TextSpan(
             text: isExpanded ? widget.text : '$first20Words...',
-            style: TextStyle(fontSize: 12, color: Colors.black54),
+            style: const TextStyle(fontSize: 12, color: Colors.black54),
           ),
           TextSpan(
             text: isExpanded ? ' Read less' : ' Read more',
-            style: TextStyle(fontSize: 12, color: Colors.blue),
+            style: const TextStyle(fontSize: 12, color: Colors.blue),
             recognizer: _tapGestureRecognizer
               ..onTap = () {
                 setState(() {
@@ -310,7 +318,7 @@ class SizeOfT extends StatefulWidget {
 class _SizeOfTState extends State<SizeOfT> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 300,
       child: Row(
         children: listOfSize.map((cat) {

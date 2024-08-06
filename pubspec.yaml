@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   http: ^1.2.2
   iconsax: ^0.0.8
+  # carousel_slider: ^4.2.1
 
 
 
@@ -42,13 +43,13 @@ flutter:
   uses-material-design: true
 #================================== ده يخصنا عادي =============================
   assets:
-    - assets/
+    - assets/image/
   #   - images/a_dot_ham.jpeg
 
   fonts:
     - family: Schyler
       fonts:
-        - asset: assets/Pacifico-Regular.ttf
+        - asset: assets/font/Pacifico-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

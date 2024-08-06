@@ -1,10 +1,86 @@
 import 'package:ecomorse/Screens/home_screen.dart';
+import 'package:ecomorse/Screens/loginscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:ecomorse/constants/AppConstants.dart';
+import 'package:iconsax/iconsax.dart';
 
 void main() {
-  runApp( HomeScreen());
+  runApp(MyApp());
 }
-// asdfasdf
+
+late double height;
+late double width;
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  void updateState(String category) {
+    setState(() {
+      selectedCategory = category;
+    });
+  }
+
+  int _selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.home),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.shop),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.heart),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.user),
+              label: '',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: blue,
+          unselectedItemColor: Colors.black54,
+          onTap: (index) {
+            setState(() {
+              print(index);
+              _selectedIndex = index;
+            });
+          },
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+        ),
+        body: SafeArea(
+          child: _selectedIndex == 0
+              ? HomeScreen()
+              : _selectedIndex == 1
+                  ? Container()
+                  : _selectedIndex == 2
+                      ? Container()
+                      : _selectedIndex == 3
+                          ? LoginScreen()
+                          : const Center(child: Text('error x55'),),
+        ),
+      ),
+    );
+  }
+}
+
 
 
     //*         love icon

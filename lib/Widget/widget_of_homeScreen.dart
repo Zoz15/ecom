@@ -1,33 +1,6 @@
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:flutter/material.dart';
 
-// class NewWidget extends StatelessWidget {
-//   const NewWidget({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(4.0),
-//       child: Container(
-//         height: 45,
-//         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-//         child: Center(
-//             child: Text(
-//           'All product',
-//           style: TextStyle(color: white),
-//         )),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(25),
-//           color: orange,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// ignore: must_be_immutable
 // ====================== Section of slide Under SearchBar ===============
 class CategoryBar extends StatefulWidget {
   final Function(String) onback;
@@ -38,8 +11,6 @@ class CategoryBar extends StatefulWidget {
 }
 
 class _CategoryBarState extends State<CategoryBar> {
-  
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -82,23 +53,94 @@ class _CategoryBarState extends State<CategoryBar> {
   }
 }
 
-// Padding Section_of_slide_Under_SearchBarStatee(String name_of_section) {
-//   return Padding(
-//     padding: EdgeInsets.all(4.0),
-//     child: AnimatedContainer(
-//       height: 45,
-//       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(25),
-//         color: selectedCategory == name_of_section ? orange : orangelite,
-//       ),
-//       duration: const Duration(milliseconds: 500),
-//       child: Center(
-//           child: Text(
-//         name_of_section,
-//         style: TextStyle(
-//             color: selectedCategory == name_of_section ? white : orange),
-//       )),
-//     ),
-//   );
-// }
+// ignore: must_be_immutable
+class ExploreFristThinkInApp extends StatefulWidget {
+  Function(String) onback;
+  ExploreFristThinkInApp({
+    required this.onback,
+    super.key,
+  });
+
+  @override
+  State<ExploreFristThinkInApp> createState() => _ExploreFristThinkInAppState();
+}
+
+class _ExploreFristThinkInAppState extends State<ExploreFristThinkInApp> {
+  IconData theicon = Icons.arrow_downward_outlined;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, left: 20, bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Explore',
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 30,
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Trendy ',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Text(
+                        'Cloths',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 30,
+                        ),
+                      ),
+                      Image(
+                        image: AssetImage('assets/image/underline.png'),
+                        fit: BoxFit.fill, //assets\image\underline.png
+                        height: 7,
+                        width: 100,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: selectedCategory == 'All'
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        if (theicon == Icons.arrow_upward_outlined) {
+                          sortState = true;
+                          theicon = Icons.arrow_downward_outlined;
+                        } else {
+                          sortState = false;
+                          theicon = Icons.arrow_upward_outlined;
+                        }
+                      });
+                      widget.onback(selectedCategory);
+                    },
+                    icon: Icon(theicon))
+                : const SizedBox(
+                    height: 2,
+                  ),
+          )
+        ],
+      ),
+    );
+  }
+}
