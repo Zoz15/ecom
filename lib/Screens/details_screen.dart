@@ -56,7 +56,7 @@ class DetailsScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             color: white),
                         width: double.infinity,
-                        height: (height / 2) - 25,
+                        height: (heightOfScreen / 2) - 25,
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: ClipRRect(
@@ -146,7 +146,7 @@ class DetailsScreen extends StatelessWidget {
                           },
                           child: Container(
                             height: 50,
-                            width: width / 2,
+                            width: widthOfScreen / 2,
                             //width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),

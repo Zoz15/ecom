@@ -32,7 +32,8 @@ Widget allProductWidget() {
               return InkWell(
                 onTap: () {
                   print(listOfDetails);
-                  print('--------------------------------------------------------\n\n\n\n\n\n');
+                  print(
+                      '--------------------------------------------------------\n\n\n\n\n\n');
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -67,7 +68,7 @@ class ProductCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              width: width / 2 - 20,
+              width: widthOfScreen / 2 - 20,
               height: 70,
               decoration: BoxDecoration(
                 color: white,

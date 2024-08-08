@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void updateState(String category) {
+  void _updateState(String category) {
     setState(() {
       selectedCategory = category;
     });
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         ExploreFristThinkInApp(
-          onback: updateState,
+          onback: _updateState,
         ),
         //SearchBar(width),
         //              ? botton next to search bar
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: CategoryBar(
-                  onback: updateState,
+                  onback: _updateState,
                 ),
               ),
               //               ? contaner have radius only top
@@ -46,15 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? const Desc()
                           : allProductWidget()
                       : selectedCategory == 'Other'
-                          ? Category(onSelected: updateState)
+                          ? Category(onSelected: _updateState)
                           : selectedCategory == 'Man'
                               ? ManWomen(
-                                  onSelected: updateState,
+                                  onSelected: _updateState,
                                   isman: true,
                                 )
                               : selectedCategory == 'Women'
                                   ? ManWomen(
-                                      onSelected: updateState,
+                                      onSelected: _updateState,
                                       isman: false,
                                     )
                                   : Container()),

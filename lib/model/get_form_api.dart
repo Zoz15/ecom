@@ -4,6 +4,7 @@ import 'package:ecomorse/model/get_all_prodacts.dart';
 import 'package:ecomorse/model/get_desc.dart';
 import 'package:ecomorse/model/get_details.dart';
 import 'package:ecomorse/model/get_jewelery.dart';
+import 'package:ecomorse/model/user_details.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<AllProducts>> fetchAllProducts() async {
@@ -114,7 +115,8 @@ Future<List<Jewelery_Electronics>> funGetJewelery(String thecategore) async {
 //List<Details> listOfDetails = [];
 Future<List<Details>> fetGetDetails(int id) async {
   try {
-    final response = await http.get(Uri.parse('https://fakestoreapi.com/products/$id'));
+    final response =
+        await http.get(Uri.parse('https://fakestoreapi.com/products/$id'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       if (data is Map<String, dynamic>) {
@@ -124,12 +126,60 @@ Future<List<Details>> fetGetDetails(int id) async {
         throw Exception('Unexpected data format');
       }
 
-      print(listOfDetails);
-      print('=================================\n\n\n\n\n\n\n\n\n\n');
+      //print(listOfDetails);
+      //print('=================================\n\n\n\n\n\n\n\n\n\n');
 
       return listOfDetails;
     } else {
       throw Exception('Failed to load product');
+    }
+  } catch (e) {
+    print('Error: $e');
+    throw e;
+  }
+}
+
+Future<int> login(String username, String password) async {
+  final url = Uri.parse('https://fakestoreapi.com/auth/login');
+
+  final response = await http.post(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'username': username,
+      'password': password,
+    }),
+  );
+  // print('\x1B[34mhelllllpppppppppppppppppp\x1B[0m');
+  // print(response.statusCode);
+
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> responseData = json.decode(response.body);
+    // print('----------------------------------');
+    // print(responseData);
+
+    return 0;
+  } else {
+    return 1;
+    //throw Exception('Failed to login');
+  }
+  //return response.statusCode;
+}
+
+Future<void> fetchUserDetils(int x) async {
+  try {
+    final response =
+        await http.get(Uri.parse('https://fakestoreapi.com/users/$x'));
+    final data = json.decode(response.body);
+    if (data is Map<String, dynamic>) {
+      final product = UserDetails.fromJson(data);
+      UserDetail = [product];
+
+      print(UserDetails());
+    } else {
+      throw Exception('Unexpected data format');
     }
   } catch (e) {
     print('Error: $e');

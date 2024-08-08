@@ -8,10 +8,14 @@ void main() {
   runApp(MyApp());
 }
 
-late double height;
-late double width;
+late double heightOfScreen;
+late double widthOfScreen;
 
 class MyApp extends StatefulWidget {
+  // void initState() {
+  //   //getprefs();
+  // }
+
   const MyApp({super.key});
 
   @override
@@ -19,6 +23,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  
+
   void updateState(String category) {
     setState(() {
       selectedCategory = category;
@@ -29,8 +35,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height;
-    width = MediaQuery.of(context).size.width;
+    heightOfScreen = MediaQuery.of(context).size.height;
+    widthOfScreen = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -58,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           unselectedItemColor: Colors.black54,
           onTap: (index) {
             setState(() {
-              print(index);
+              //print(index);
               _selectedIndex = index;
             });
           },
@@ -74,52 +80,11 @@ class _MyAppState extends State<MyApp> {
                       ? Container()
                       : _selectedIndex == 3
                           ? LoginScreen()
-                          : const Center(child: Text('error x55'),),
+                          : const Center(
+                              child: Text('error x55'),
+                            ),
         ),
       ),
     );
   }
 }
-
-
-
-    //*         love icon
-// Stack(
-//                           alignment: Alignment.topRight,
-//                           children: [
-//                             Image.network(
-//                               'https://imgs.search.brave.com/ZYABGg8i634IdrHcai8qHch4bzvJQULWdIunltBVlqc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGhpd2lzZS5j/b20vaG9tZS9kZXYt/YmxhY2tfMjAoMSku/d2VicD93PTM4NDAm/cT03NQ',
-//                               fit: BoxFit.cover,
-//                             ),
-//                             Stack(
-//                               alignment: Alignment.center,
-//                               children: [
-//                                 Icon(
-//                                   Icons.favorite,
-//                                   color: orange,
-//                                   size: 28,
-//                                 ),
-//                                 InkWell(
-//                                   onTap: () {
-//                                     setState(() {
-//                                       islove ? islove = false : islove = true;
-//                                     });
-//                                   },
-//                                   child: Padding(
-//                                     padding: const EdgeInsets.only(bottom: 1),
-//                                     child: AnimatedContainer(
-//                                       duration: const Duration(milliseconds: 500),
-//                                       // islove ?
-                                    
-//                                       child: Icon(
-//                                         Icons.favorite,
-//                                         color: islove ? orange : Colors.white,
-//                                         size: 23,
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 )
-//                               ],
-//                             ),
-//                           ],
-//                         ),

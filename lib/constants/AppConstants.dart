@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:ecomorse/model/get_all_prodacts.dart';
 import 'package:ecomorse/model/get_desc.dart';
 import 'package:ecomorse/model/get_details.dart';
 import 'package:ecomorse/model/get_jewelery.dart';
+import 'package:ecomorse/model/user_details.dart';
 import 'package:flutter/material.dart';
 
 double hightoffiald = 50;
@@ -17,7 +20,7 @@ const Color black = Color(0xff01030a);
 // String desc = ;
 // String category = ;
 // String top_10 = ;
-
+bool isLogin = false;
 String selectedCategory = 'All';
 String selectedSize = 'S';
 String selectedCategoryLevel2 = 'Electronics';
@@ -30,6 +33,7 @@ List<DescProduct> listOfDesc = [];
 List<Jewelery_Electronics> listOfJeEleMenWomen = [];
 List<String> listOfCategories = [];
 List<Details> listOfDetails = [];
+List<UserDetails> UserDetail = [];
 final List<String> category = [
   'All',
   'Man',
@@ -58,4 +62,10 @@ class Size extends StatelessWidget {
       height: h,
     );
   }
+}
+
+int getRandomInt(int x) {
+  x = x - 1;
+
+  return Random().nextInt(x) + 1;
 }
