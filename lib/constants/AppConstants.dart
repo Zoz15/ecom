@@ -1,3 +1,6 @@
+// ignore: file_names
+// ignore: file_names
+// ignore: file_names
 import 'dart:math';
 
 import 'package:ecomorse/model/get_all_prodacts.dart';
@@ -15,11 +18,6 @@ const Color liteBlue = Color(0xffecf0ff);
 const Color white = Color(0xffffffff);
 const Color black = Color(0xff01030a);
 
-//List category = [, 'Dosc',   'Other', 'Top 10 limet'];
-// String allproduct = ;
-// String desc = ;
-// String category = ;
-// String top_10 = ;
 bool isLogin = false;
 String selectedCategory = 'All';
 String selectedSize = 'S';
@@ -33,7 +31,8 @@ List<DescProduct> listOfDesc = [];
 List<Jewelery_Electronics> listOfJeEleMenWomen = [];
 List<String> listOfCategories = [];
 List<Details> listOfDetails = [];
-List<UserDetails> UserDetail = [];
+List<UserDetails> userDetail = [];
+// List<UserDetails> userDetail = [];
 final List<String> category = [
   'All',
   'Man',

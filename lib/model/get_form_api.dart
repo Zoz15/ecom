@@ -175,7 +175,7 @@ Future<void> fetchUserDetils(int x) async {
     final data = json.decode(response.body);
     if (data is Map<String, dynamic>) {
       final product = UserDetails.fromJson(data);
-      UserDetail = [product];
+      userDetail = [product];
 
       print(UserDetails());
     } else {

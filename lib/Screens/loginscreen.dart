@@ -1,7 +1,10 @@
 import 'package:ecomorse/Screens/login/sign_in.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/main.dart';
+import 'package:ecomorse/model/get_form_api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -87,17 +90,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      const Size(w: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         flex: 1,
                         child: InkWell(
                           onTap: () async {
-                            //asfdasfd
-                            //asfdasdf
-                            //asfd
-
-                            //asdf
-
                             final category = await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -111,25 +108,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (category != null) {
                               updateState(category);
                             }
-
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => SignIn(
-                            //       onback: (String category) {
-                            //         setState(() {
-                            //           updateState(category);
-                            //         });
-                            //         //Navigator.pop(context);
-                            //       },
-                            //     ),
-                            //   ),
-                            // );
-
-                            //srfgsgsdefg
-                            //sd/fgsdfgsdfg
-                            //sdgfrsdgs
-                            // /sdegsg
                           },
                           child: Container(
                             height: 45,
@@ -137,7 +115,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: blue,
-                              // border: Border.all(),
                             ),
                             child: const Center(
                               child: Text(
@@ -161,13 +138,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  ContinueWith(
+                  const LoginWith(
                     name: 'Google',
                     url:
                         'https://imgs.search.brave.com/0dfkmCFWC2zrjWCenB_rDnfa_wKBmKDmxG4qSB78iQs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMtMDAuaWNvbmR1/Y2suY29tL2Fzc2V0/cy4wMC9nb29nbGUt/aWNvbi01MTJ4NTEy/LXRxYzllbDNyLnBu/Zw',
                   ),
-                  const Size(h: 15),
-                  ContinueWith(
+                  const SizedBox(height: 15),
+                  const LoginWith(
                     name: 'Apple',
                     url:
                         'https://imgs.search.brave.com/kz5eNXl8QIviZLx3NEyVSeHltYiq4OLIiOZFXsC6QzE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi9mL2ZhL0Fw/cGxlX2xvZ29fYmxh/Y2suc3ZnLzIyMHB4/LUFwcGxlX2xvZ29f/YmxhY2suc3ZnLnBu/Zw',
@@ -178,14 +155,14 @@ class _LoginScreenState extends State<LoginScreen> {
           );
   }
 
-  Column login() {
+  Widget login() {
     return Column(
       children: [
         Container(
           color: blue,
           child: Column(
             children: [
-              const Size(h: 15),
+              const SizedBox(height: 15),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -193,37 +170,90 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(fontSize: 20, color: white),
                 ),
               ),
-              Size(h: 15),
+              const SizedBox(height: 15),
               Container(
                 height: 40,
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                    color: Color(0xfffef7ff),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20))),
+                  color: Color(0xfffef7ff),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
               ),
             ],
           ),
         ),
         SizedBox(
           width: double.infinity,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 130,
-                width: 120,
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(
-                    'assets/image/x${getRandomInt(17)}.jpeg',
-                  ),
-                ),
-              ),
-              Text(
-                'Axon',
-                style: TextStyle(fontSize: 30, color: blue),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: FutureBuilder(
+              future: fetchUserDetils(10),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Center(child: Text("Error loading data"));
+                  } else {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 130,
+                          width: 120,
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(
+                              'assets/image/x${getRandomInt(17)}.jpeg',
+                            ),
+                          ),
+                        ),
+                        const Text(
+                          'Axon plus',
+                          style: TextStyle(fontSize: 30, color: blue),
+                        ),
+                        const Text(
+                          'Mobile dev',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: black,
+                              fontWeight: FontWeight.w200),
+                        ),
+                        const SizedBox(height: 20),
+                        MyCard(
+                          icon: Icons.email,
+                          text: userDetail[0].email ?? '',
+                          isPassword: false,
+                        ),
+                        MyCard(
+                          icon: Icons.lock,
+                          text: userDetail[0].password ?? '',
+                          isPassword: true,
+                        ),
+                        MyCard(
+                          icon: Icons.call,
+                          text: userDetail[0].phone ?? '',
+                          isPassword: false,
+                        ),
+                        MyCard(
+                          icon: Icons.location_city,
+                          text: userDetail[0].address?.city ?? '',
+                          isPassword: false,
+                        ),
+                        MyCard(
+                          icon: Icons.directions_walk,
+                          text: userDetail[0].address?.street ?? '',
+                          isPassword: false,
+                        ),
+                      ],
+                    );
+                  }
+                } else {
+                  return const Center(child: Text("Error"));
+                }
+              },
+            ),
           ),
         ),
       ],
@@ -231,49 +261,92 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-// ignore: must_be_immutable
-class ContinueWith extends StatelessWidget {
-  String url;
-  String name;
-  ContinueWith({
-    super.key,
-    required this.name,
-    required this.url,
-  });
+class MyCard extends StatefulWidget {
+  final IconData icon;
+  final String text;
+  final bool isPassword;
+
+  MyCard({
+    Key? key,
+    required this.icon,
+    required this.text,
+    this.isPassword = false,
+  }) : super(key: key);
+
+  @override
+  _MyCardState createState() => _MyCardState();
+}
+
+class _MyCardState extends State<MyCard> {
+  bool _isObscured = true;
+
+  void _toggleVisibility() {
+    setState(() {
+      _isObscured = !_isObscured;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Card(
+          color: Colors.grey[300],
+          child: ListTile(
+            title: widget.isPassword
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          _isObscured ? '*' * widget.text.length : widget.text,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: _toggleVisibility,
+                        icon: Icon(_isObscured
+                            ? Icons.remove_red_eye_outlined
+                            : Icons.visibility_off),
+                      ),
+                    ],
+                  )
+                : Text(widget.text),
+            leading: Icon(widget.icon),
+          ),
+        ),
+        const SizedBox(height: 15),
+      ],
+    );
+  }
+}
+
+class LoginWith extends StatelessWidget {
+  final String name;
+  final String url;
+
+  const LoginWith({required this.name, required this.url});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      width: MediaQuery.of(context).size.width - 10,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.black26),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.grey),
       ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(
-              url,
-              height: 25,
-              width: 25,
-            ),
-            const Size(w: 10),
-            Text('Continue with $name')
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.network(
+            url,
+            height: 30,
+            width: 30,
+          ),
+          const SizedBox(width: 15),
+          Text(name),
+        ],
       ),
     );
   }
 }
-
-
-
-// SizedBox(
-//                 height: 130,
-//                 width: 120,
-//                 child: CircleAvatar(
-//                     backgroundImage:
-//                         AssetImage('assets/image/x${getRandomInt(17)}.jpeg')),
-//               ),

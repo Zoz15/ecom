@@ -5,7 +5,7 @@ import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:iconsax/iconsax.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 late double heightOfScreen;
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: SafeArea(
           child: _selectedIndex == 0
-              ? HomeScreen()
+              ? const HomeScreen()
               : _selectedIndex == 1
                   ? Container()
                   : _selectedIndex == 2
