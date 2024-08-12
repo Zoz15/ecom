@@ -12,11 +12,10 @@ late double heightOfScreen;
 late double widthOfScreen;
 
 class MyApp extends StatefulWidget {
-  // void initState() {
-  //   //getprefs();
-  // }
-
+  
   const MyApp({super.key});
+
+  
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -64,7 +63,6 @@ class _MyAppState extends State<MyApp> {
           unselectedItemColor: Colors.black54,
           onTap: (index) {
             setState(() {
-              //print(index);
               _selectedIndex = index;
             });
           },

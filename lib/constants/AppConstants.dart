@@ -1,14 +1,14 @@
-// ignore: file_names
-// ignore: file_names
-// ignore: file_names
-import 'dart:math';
 
+import 'dart:math';
 import 'package:ecomorse/model/get_all_prodacts.dart';
 import 'package:ecomorse/model/get_desc.dart';
 import 'package:ecomorse/model/get_details.dart';
 import 'package:ecomorse/model/get_jewelery.dart';
 import 'package:ecomorse/model/user_details.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+//! ======================= var ==================
 
 double hightoffiald = 50;
 double radius = 10;
@@ -24,6 +24,30 @@ String selectedSize = 'S';
 String selectedCategoryLevel2 = 'Electronics';
 String dropdownValue = '';
 bool sortState = true;
+
+String? getedName;
+String? getedPassword;
+
+
+//!=================== fun ========================
+
+Future<void> initializePrefs() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  getedName = prefs.getString('name');
+  getedPassword = prefs.getString('password');
+  isLogin = getedName != null;
+}
+
+setprefs(
+  String username,
+  String password,
+  // int id,
+) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('name', username);
+  prefs.setString('password', password);
+  //prefs.setInt('id', id);
+}
 
 // !================= the list ================
 List<AllProducts> listOfAllProducts = [];
@@ -47,6 +71,11 @@ final List<String> listOfSize = [
   'XXL',
 ];
 final List<String> electronicsandjewelery = ['Electronics', 'Jewelery'];
+
+
+
+//! ================= class =====================
+
 
 class Size extends StatelessWidget {
   final double h;

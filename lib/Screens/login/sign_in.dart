@@ -1,22 +1,20 @@
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/model/get_form_api.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 String name = "jimmie_k";
 String password = "klein*#%*";
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   final Function(String)? onback;
 
   SignIn({super.key, required this.onback});
 
-  setprefs(String n, String p) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('name', n);
-    prefs.setString('password', p);
-  }
+  @override
+  State<SignIn> createState() => _SignInState();
+}
 
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,13 +70,16 @@ class SignIn extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(height: 40),
-                        Emailandpassword(text: 'Enter your name'),
+                        MyCard(text: 'Enter your name'),
                         const SizedBox(height: 15),
-                        Emailandpassword(text: 'Password', isemail: false),
+                        MyCard(text: 'Password', isemail: false),
                         const SizedBox(height: 20),
                         InkWell(
                           onTap: () async {
-                            setprefs(name, password);
+                            setprefs(
+                              name,
+                              password,
+                            );
 
                             int statescode = await login(name, password);
 
@@ -87,8 +88,8 @@ class SignIn extends StatelessWidget {
                                 SnackBar(content: Text('Login Success')),
                               );
                               isLogin = true;
-                              if (onback != null) {
-                                onback!(selectedCategory);
+                              if (widget.onback != null) {
+                                widget.onback!(selectedCategory);
                               }
                               Navigator.pop(context);
                             } else {
@@ -127,8 +128,8 @@ class SignIn extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class Emailandpassword extends StatelessWidget {
-  Emailandpassword({
+class MyCard extends StatelessWidget {
+  MyCard({
     super.key,
     required this.text,
     this.isemail = true,

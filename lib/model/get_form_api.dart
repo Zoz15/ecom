@@ -186,3 +186,58 @@ Future<void> fetchUserDetils(int x) async {
     throw e;
   }
 }
+
+
+
+Future<void> createUser(
+  String email,
+  String username,
+  String password,
+  String firstname,
+  String lastname,
+  String city,
+  String street,
+  String number,
+  String zipcode,
+  String lat,
+  String long,
+  String phone,
+) async {
+  final url = Uri.parse('https://fakestoreapi.com/users');
+
+  final Map<String, dynamic> body = {
+    "email": email,
+    "username": username,
+    "password": password,
+    "name": {
+      "firstname": firstname,
+      "lastname": lastname,
+    },
+    "address": {
+      "city": city,
+      "street": street,
+      "number": number,
+      "zipcode": zipcode,
+      "geolocation": {
+        "lat": lat,
+        "long": long,
+      },
+    },
+    "phone": phone,
+  };
+
+  final response = await http.post(
+    url,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: jsonEncode(body),
+  );
+
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    final jsonResponse = jsonDecode(response.body);
+    print('User created successfully: $jsonResponse');
+  } else {
+    print('Failed to create user: ${response.statusCode}');
+  }
+}

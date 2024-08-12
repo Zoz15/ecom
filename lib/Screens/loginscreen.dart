@@ -1,14 +1,13 @@
 import 'package:ecomorse/Screens/login/sign_in.dart';
+import 'package:ecomorse/Screens/login/sign_up.dart';
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/main.dart';
 import 'package:ecomorse/model/get_form_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({
+  const LoginScreen({
     super.key,
   });
 
@@ -19,18 +18,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
-    _initializePrefs();
+    initializePrefs();
     super.initState();
   }
 
-  Future<void> _initializePrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? _getedName = prefs.getString('name');
-    String? _getedPassword = prefs.getString('password');
-    setState(() {
-      isLogin = _getedName != null;
-    });
+  void nullvar() {
+    getedName = null;
+    getedPassword = null;
   }
+
+  
 
   void updateState(String category) {
     setState(() {
@@ -85,8 +82,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: const Color(0xfff3f2f2),
                             border: Border.all(color: Colors.black26),
                           ),
-                          child: const Center(
-                            child: Text('Sign up'),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUp(),
+                                ),
+                              );
+                            },
+                            child: const Center(
+                              child: Text('Sign up'),
+                            ),
                           ),
                         ),
                       ),
@@ -198,55 +205,80 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (snapshot.hasError) {
                     return const Center(child: Text("Error loading data"));
                   } else {
-                    return Column(
-                      children: [
-                        SizedBox(
-                          height: 130,
-                          width: 120,
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage(
-                              'assets/image/x${getRandomInt(17)}.jpeg',
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 130,
+                            width: 120,
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(
+                                'assets/image/x${getRandomInt(17)}.jpeg',
+                              ),
                             ),
                           ),
-                        ),
-                        const Text(
-                          'Axon plus',
-                          style: TextStyle(fontSize: 30, color: blue),
-                        ),
-                        const Text(
-                          'Mobile dev',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: black,
-                              fontWeight: FontWeight.w200),
-                        ),
-                        const SizedBox(height: 20),
-                        MyCard(
-                          icon: Icons.email,
-                          text: userDetail[0].email ?? '',
-                          isPassword: false,
-                        ),
-                        MyCard(
-                          icon: Icons.lock,
-                          text: userDetail[0].password ?? '',
-                          isPassword: true,
-                        ),
-                        MyCard(
-                          icon: Icons.call,
-                          text: userDetail[0].phone ?? '',
-                          isPassword: false,
-                        ),
-                        MyCard(
-                          icon: Icons.location_city,
-                          text: userDetail[0].address?.city ?? '',
-                          isPassword: false,
-                        ),
-                        MyCard(
-                          icon: Icons.directions_walk,
-                          text: userDetail[0].address?.street ?? '',
-                          isPassword: false,
-                        ),
-                      ],
+                          const Text(
+                            'Axon plus',
+                            style: TextStyle(fontSize: 30, color: blue),
+                          ),
+                          const Text(
+                            'Mobile dev',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: black,
+                                fontWeight: FontWeight.w200),
+                          ),
+                          const SizedBox(height: 20),
+                          MyCard(
+                            icon: Icons.email,
+                            text: userDetail[0].email ?? '',
+                            isPassword: false,
+                          ),
+                          MyCard(
+                            icon: Icons.lock,
+                            text: userDetail[0].password ?? '',
+                            isPassword: true,
+                          ),
+                          MyCard(
+                            icon: Icons.call,
+                            text: userDetail[0].phone ?? '',
+                            isPassword: false,
+                          ),
+                          MyCard(
+                            icon: Icons.location_city,
+                            text: userDetail[0].address?.city ?? '',
+                            isPassword: false,
+                          ),
+                          MyCard(
+                            icon: Icons.directions_walk,
+                            text: userDetail[0].address?.street ?? '',
+                            isPassword: false,
+                          ),
+                          Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.red[400]),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isLogin = false;
+                                  nullvar();
+                                });
+                                // Handle logout logic here
+                              },
+                              child: const Center(
+                                child: Text(
+                                  'Logout',
+                                  style: TextStyle(
+                                    color: white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   }
                 } else {
@@ -266,14 +298,15 @@ class MyCard extends StatefulWidget {
   final String text;
   final bool isPassword;
 
-  MyCard({
-    Key? key,
+  const MyCard({
+    super.key,
     required this.icon,
     required this.text,
     this.isPassword = false,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyCardState createState() => _MyCardState();
 }
 
@@ -325,7 +358,7 @@ class LoginWith extends StatelessWidget {
   final String name;
   final String url;
 
-  const LoginWith({required this.name, required this.url});
+  const LoginWith({super.key, required this.name, required this.url});
 
   @override
   Widget build(BuildContext context) {
