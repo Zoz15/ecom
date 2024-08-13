@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'dart:math';
+import 'package:ecomorse/Widget/widget_i_need_it.dart';
 
 // ignore: must_be_immutable
 class DetailsScreen extends StatelessWidget {

@@ -129,7 +129,9 @@ class _SignUpState extends State<SignUp> {
                           phone.isNotEmpty ? phone : 'no phone');
 
                       setprefs(username, password);
-
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('User created successfully')),
+                      );
                       Navigator.pop(context);
                     },
                     child: Container(

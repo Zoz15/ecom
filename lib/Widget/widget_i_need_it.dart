@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:flutter/material.dart';
 
@@ -144,3 +146,31 @@ class _ExploreFristThinkInAppState extends State<ExploreFristThinkInApp> {
     );
   }
 }
+
+
+
+//! ================= class =====================
+
+
+class Size extends StatelessWidget {
+  final double h;
+  final double w;
+
+  const Size({this.h = 0, this.w = 0, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: w,
+      height: h,
+    );
+  }
+}
+
+int getRandomInt(int x) {
+  x = x - 1;
+
+  return Random().nextInt(x) + 1;
+}
+
+

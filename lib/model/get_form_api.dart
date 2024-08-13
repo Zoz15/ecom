@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ecomorse/constants/AppConstants.dart';
 import 'package:ecomorse/model/get_all_prodacts.dart';
+import 'package:ecomorse/model/get_cart.dart';
 import 'package:ecomorse/model/get_desc.dart';
 import 'package:ecomorse/model/get_details.dart';
 import 'package:ecomorse/model/get_jewelery.dart';
@@ -97,9 +98,9 @@ Future<List<Jewelery_Electronics>> funGetJewelery(String thecategore) async {
       listOfJeEleMenWomen = productList;
 
       // print(data);
-      // print('=================================================\n\n\n\n');
+      // print('=================================================\n\n\n\n\n\n\n\n\n\n');
       // print(listOfJeEleMenWomen.length);
-      // print('=================================================\n\n\n\n');
+      // print('=================================================\n\n\n\n\n\n\n\n\n\n');
 
       //print(productList);
       return productList;
@@ -187,8 +188,6 @@ Future<void> fetchUserDetils(int x) async {
   }
 }
 
-
-
 Future<void> createUser(
   String email,
   String username,
@@ -241,3 +240,48 @@ Future<void> createUser(
     print('Failed to create user: ${response.statusCode}');
   }
 }
+
+Future<List<dynamic>> fungetcart() async {
+  final url = Uri.parse('https://fakestoreapi.com/carts/user/3');
+  final response = await http.get(url);
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    final productList =
+        (data as List<dynamic>).map((item) => Cart.fromJson(item)).toList();
+    listOfCart = productList;
+    return productList;
+  } else {
+    throw Exception('Failed to load cart');
+  }
+}
+
+// Future<List<dynamic>> funaddnewcart(
+//     int userId, String date, List<Map<String, dynamic>> products) async {
+//   final url = Uri.parse('https://fakestoreapi.com/carts');
+//   final Map<String, dynamic> body = {
+//     "userId": 5,
+//     "date": "2022-02-03",
+//     "products": [
+//       {"productId": 5, "quantity": 1},
+//       {"productId": 1, "quantity": 5},
+//     ],
+//   };
+
+//   final response = await http.post(
+//     url,
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: jsonEncode(body),
+//   );
+
+//   if (response.statusCode == 200) {
+//     final data = json.decode(response.body);
+//     final productList =
+//         (data as List<dynamic>).map((item) => Cart.fromJson(item)).toList();
+//     listOfCart = productList;
+//     return productList;
+//   } else {
+//     throw Exception('Failed to load cart');
+//   }
+// }

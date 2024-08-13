@@ -1,6 +1,7 @@
-
-import 'dart:math';
+// ignore: file_names
+// ignore: file_names
 import 'package:ecomorse/model/get_all_prodacts.dart';
+import 'package:ecomorse/model/get_cart.dart';
 import 'package:ecomorse/model/get_desc.dart';
 import 'package:ecomorse/model/get_details.dart';
 import 'package:ecomorse/model/get_jewelery.dart';
@@ -50,6 +51,7 @@ setprefs(
 }
 
 // !================= the list ================
+List<Cart> listOfCart = [];
 List<AllProducts> listOfAllProducts = [];
 List<DescProduct> listOfDesc = [];
 List<Jewelery_Electronics> listOfJeEleMenWomen = [];
@@ -72,28 +74,3 @@ final List<String> listOfSize = [
 ];
 final List<String> electronicsandjewelery = ['Electronics', 'Jewelery'];
 
-
-
-//! ================= class =====================
-
-
-class Size extends StatelessWidget {
-  final double h;
-  final double w;
-
-  const Size({this.h = 0, this.w = 0, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: w,
-      height: h,
-    );
-  }
-}
-
-int getRandomInt(int x) {
-  x = x - 1;
-
-  return Random().nextInt(x) + 1;
-}

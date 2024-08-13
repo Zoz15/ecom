@@ -1,3 +1,4 @@
+import 'package:ecomorse/Screens/cart_screen.dart';
 import 'package:ecomorse/Screens/home_screen.dart';
 import 'package:ecomorse/Screens/loginscreen.dart';
 import 'package:flutter/material.dart';
@@ -12,18 +13,13 @@ late double heightOfScreen;
 late double widthOfScreen;
 
 class MyApp extends StatefulWidget {
-  
   const MyApp({super.key});
-
-  
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  
-
   void updateState(String category) {
     setState(() {
       selectedCategory = category;
@@ -73,11 +69,11 @@ class _MyAppState extends State<MyApp> {
           child: _selectedIndex == 0
               ? const HomeScreen()
               : _selectedIndex == 1
-                  ? Container()
+                  ? const CartScreen()
                   : _selectedIndex == 2
                       ? Container()
                       : _selectedIndex == 3
-                          ? LoginScreen()
+                          ? const LoginScreen()
                           : const Center(
                               child: Text('error x55'),
                             ),
