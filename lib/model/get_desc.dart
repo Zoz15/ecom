@@ -21,7 +21,7 @@ class DescProduct {
     return DescProduct(
       id: json['id'],
       title: json['title'],
-      price: (json['price'] as num?)?.toDouble(), // Convert to double
+      price: (json['price'] as num?)?.toDouble(),
       description: json['description'],
       category: json['Other'],
       image: json['image'],
@@ -52,7 +52,7 @@ class Rating {
 
   factory Rating.fromJson(Map<String, dynamic> json) {
     return Rating(
-      rate: (json['rate'] as num?)?.toDouble(), // Convert to double
+      rate: (json['rate'] as num?)?.toDouble(), 
       count: json['count'],
     );
   }

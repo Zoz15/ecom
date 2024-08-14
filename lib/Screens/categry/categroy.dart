@@ -98,7 +98,6 @@ class _CategoryState extends State<Category> {
                       MaterialPageRoute(
                           builder: (context) =>
                               DetailsScreen(id: product.id!)));
-                            // Navigate to detail screen
                           },
                           child: ProductCard(product: product),
                         );

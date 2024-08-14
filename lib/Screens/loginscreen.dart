@@ -266,7 +266,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   isLogin = false;
                                   nullvar();
                                 });
-                                // Handle logout logic here
                               },
                               child: const Center(
                                 child: Text(

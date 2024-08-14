@@ -42,13 +42,13 @@ class Jewelery_Electronics {
 }
 
 class Rating {
-  double? rate; // Changed from int to double to match expected API response
+  double? rate;  
   int? count;
 
   Rating({this.rate, this.count});
 
   Rating.fromJson(Map<String, dynamic> json) {
-    rate = (json['rate'] as num?)?.toDouble(); // Ensure rate is cast to double
+    rate = (json['rate'] as num?)?.toDouble();
     count = json['count'] as int?;
   }
 
