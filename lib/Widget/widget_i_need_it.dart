@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:ecomorse/constants/AppConstants.dart';
+import 'package:ecomorse/main.dart';
 import 'package:flutter/material.dart';
 
 // ====================== Section of slide Under SearchBar ===============
@@ -13,14 +14,19 @@ class CategoryBar extends StatefulWidget {
 }
 
 class _CategoryBarState extends State<CategoryBar> {
+  String selectedCategory = 'All'; // Ensure this is initialized
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: category.map((cat) {
-        return Expanded(
+        return SizedBox(
+          width: (widthOfScreen / 4) - 10,
           child: InkWell(
             onTap: () {
-              selectedCategory = cat;
+              setState(() {
+                selectedCategory = cat;
+              });
               widget.onback(cat);
             },
             child: Padding(
@@ -32,17 +38,16 @@ class _CategoryBarState extends State<CategoryBar> {
                   borderRadius: BorderRadius.circular(20),
                   border: selectedCategory != cat
                       ? Border.all(color: Colors.black12)
-                      : Border.all(color: white),
-                  color: selectedCategory == cat ? blue : white,
+                      : Border.all(color: Colors.white),
+                  color: selectedCategory == cat ? Colors.blue : Colors.white,
                 ),
                 duration: const Duration(milliseconds: 500),
                 child: Center(
-                  child: Expanded(
-                    child: Text(
-                      cat,
-                      style: TextStyle(
-                        color: selectedCategory == cat ? Colors.white : black,
-                      ),
+                  child: Text(
+                    cat,
+                    style: TextStyle(
+                      color:
+                          selectedCategory == cat ? Colors.white : Colors.black,
                     ),
                   ),
                 ),
@@ -147,10 +152,7 @@ class _ExploreFristThinkInAppState extends State<ExploreFristThinkInApp> {
   }
 }
 
-
-
 //! ================= class =====================
-
 
 class Size extends StatelessWidget {
   final double h;
@@ -172,5 +174,3 @@ int getRandomInt(int x) {
 
   return Random().nextInt(x) + 1;
 }
-
-
