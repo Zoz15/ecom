@@ -25,6 +25,8 @@ String selectedSize = 'S';
 String selectedCategoryLevel2 = 'Electronics';
 String dropdownValue = '';
 bool sortState = true;
+int quantity = 1;
+
 
 String? getedName;
 String? getedPassword;
@@ -73,4 +75,19 @@ final List<String> listOfSize = [
   'XXL',
 ];
 final List<String> electronicsandjewelery = ['Electronics', 'Jewelery'];
+
+final List colors = [
+    const Color(0xff51c51c),
+    const Color(0xff7a0808),
+    black,
+    const Color.fromARGB(255, 236, 236, 236),
+    const Color(0xff1510db),
+
+    // Colors.green,
+    // const Color.fromARGB(255, 214, 89, 67),
+    // Colors.black,
+    // Color.fromARGB(255, 214, 205, 118),
+    // //white,
+    // Color.fromARGB(255, 12, 70, 117),
+  ];
 

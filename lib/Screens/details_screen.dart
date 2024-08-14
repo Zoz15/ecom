@@ -3,15 +3,19 @@ import 'package:ecomorse/main.dart';
 import 'package:ecomorse/model/get_form_api.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'dart:math';
 import 'package:ecomorse/Widget/widget_i_need_it.dart';
 
 // ignore: must_be_immutable
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   int id;
   DetailsScreen({super.key, required this.id});
 
+  @override
+  _DetailsScreenState createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
   int getRandomInt() {
     int randomNumber = 0;
     Random random = Random();
@@ -38,12 +42,12 @@ class DetailsScreen extends StatelessWidget {
         //backgroundColor: white,
         title: const Text('Details'),
         centerTitle: true,
-        actions: const [Icon(Iconsax.shop), Size(w: 10)],
+        // actions: const [Icon(Iconsax.shop), Size(w: 10)],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: fetGetDetails(id), // todo adsfadfadf
+          future: fenGetDetails(widget.id), // todo adsfadfadf
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -61,9 +65,12 @@ class DetailsScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: ClipRRect(
-                            child: Image.network(
-                              listOfDetails[0].image!,
-                              fit: BoxFit.contain,
+                            child: Hero(
+                              tag: widget.id.toString(),
+                              child: Image.network(
+                                listOfDetails[0].image!,
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                         )),
@@ -105,9 +112,7 @@ class DetailsScreen extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
-                    const Size(
-                      h: 10,
-                    ),
+                    const Size(h: 10),
                     const SizedBox(width: 180, child: ColorSelection()),
                     const Size(h: 12),
                     const Text(
@@ -121,10 +126,10 @@ class DetailsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          ' ${listOfDetails[0].price!} ',
+                          ' \$${listOfDetails[0].price!} ',
                           style: const TextStyle(
                             fontFamily: 'Schyler',
-                            fontSize: 25,
+                            fontSize: 35,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
@@ -141,30 +146,37 @@ class DetailsScreen extends StatelessWidget {
                                 color: Colors.black54),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            // todo go to car
-                          },
-                          child: Container(
-                            height: 50,
-                            width: widthOfScreen / 2,
-                            //width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: blue,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'add to car',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: white,
-                                ),
+                        const Quantity()
+                      ],
+                    ),
+                    const Size(h: 10),
+                    InkWell(
+                      onTap: () {
+                        // todo go to car
+                      },
+                      child: Container(
+                        height: 50,
+                        width: double.infinity,
+                        //width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: blue,
+                        ),
+                        child: Center(
+                          child: InkWell(
+                            onTap: () {
+                              addCart(widget.id, quantity);
+                            },
+                            child: const Text(
+                              'add to car',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: white,
                               ),
                             ),
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
@@ -200,21 +212,6 @@ class ColorSelection extends StatefulWidget {
 
 class _ColorSelectionState extends State<ColorSelection> {
   int selectedIndex = -1; // No color selected
-
-  final List colors = [
-    const Color(0xff51c51c),
-    const Color(0xff7a0808),
-    black,
-    const Color.fromARGB(255, 236, 236, 236),
-    const Color(0xff1510db),
-
-    // Colors.green,
-    // const Color.fromARGB(255, 214, 89, 67),
-    // Colors.black,
-    // Color.fromARGB(255, 214, 205, 118),
-    // //white,
-    // Color.fromARGB(255, 12, 70, 117),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -360,6 +357,40 @@ class _SizeOfTState extends State<SizeOfT> {
           );
         }).toList(),
       ),
+    );
+  }
+}
+
+class Quantity extends StatefulWidget {
+  const Quantity({super.key});
+
+  @override
+  State<Quantity> createState() => _QuantityState();
+}
+
+class _QuantityState extends State<Quantity> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text('Quantity:'),
+        const Size(w: 10),
+        DropdownButton<int>(
+          value: quantity,
+          items: List.generate(10, (index) => index + 1)
+              .map((value) => DropdownMenuItem<int>(
+                    value: value,
+                    child: Text(value.toString()),
+                  ))
+              .toList(),
+          onChanged: (value) {
+            setState(() {
+              quantity = value!;
+            });
+          },
+        ),
+        const Size(w: 10),
+      ],
     );
   }
 }

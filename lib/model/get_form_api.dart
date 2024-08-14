@@ -114,7 +114,7 @@ Future<List<Jewelery_Electronics>> funGetJewelery(String thecategore) async {
 }
 
 //List<Details> listOfDetails = [];
-Future<List<Details>> fetGetDetails(int id) async {
+Future<List<Details>> fenGetDetails(int id) async {
   try {
     final response =
         await http.get(Uri.parse('https://fakestoreapi.com/products/$id'));
@@ -135,7 +135,7 @@ Future<List<Details>> fetGetDetails(int id) async {
       throw Exception('Failed to load product');
     }
   } catch (e) {
-    print('Error: $e');
+    print('Erroziadr: $e');
     throw e;
   }
 }
@@ -242,7 +242,7 @@ Future<void> createUser(
 }
 
 Future<List<dynamic>> fungetcart() async {
-  final url = Uri.parse('https://fakestoreapi.com/carts/user/3');
+  final url = Uri.parse('https://fakestoreapi.com/carts/user/1');
   final response = await http.get(url);
   if (response.statusCode == 200) {
     final data = json.decode(response.body);
@@ -254,6 +254,40 @@ Future<List<dynamic>> fungetcart() async {
     throw Exception('Failed to load cart');
   }
 }
+
+
+Future<void> addCart(
+  int productId,
+  int quantity,
+) async {
+  final url = Uri.parse('https://fakestoreapi.com/carts');
+
+  final Map<String, dynamic> body = {
+    "userId": 3,
+    "date": DateTime.now().toString(),
+    "products": [
+      {"productId": productId, "quantity": quantity},
+      
+    ],
+  };
+
+  final response = await http.post(
+    url,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: jsonEncode(body),
+  );
+
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    final jsonResponse = jsonDecode(response.body);
+    print('Cart created successfully: $jsonResponse');
+  } else {
+    print('Failed to create cart: ${response.statusCode}');
+  }
+}
+
+
 
 // Future<List<dynamic>> funaddnewcart(
 //     int userId, String date, List<Map<String, dynamic>> products) async {

@@ -77,10 +77,13 @@ class ProductCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ClipRRect(
-                    child: Image.network(
-                  product.image ?? '',
-                  fit: BoxFit.contain,
-                )),
+                    child: Hero(
+                      tag: product.id.toString(),
+                      child: Image.network(
+                                        product.image ?? '',
+                                        fit: BoxFit.contain,
+                                      ),
+                    )),
               ),
             ),
           ),
