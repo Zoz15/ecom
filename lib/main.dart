@@ -71,7 +71,9 @@ class _MyAppState extends State<MyApp> {
               : _selectedIndex == 1
                   ? const CartScreen()
                   : _selectedIndex == 2
-                      ? Container()
+                      ? const Center(
+                          child: Text('not add favorite yet'),
+                        )
                       : _selectedIndex == 3
                           ? const LoginScreen()
                           : const Center(

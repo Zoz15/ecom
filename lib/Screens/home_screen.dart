@@ -34,15 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
           //              ? botton next to search bar
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 children: [
                   CategoryBar(
                     onback: _updateState,
                   ),
-                  //               ? contaner have radius only top
-
-                  Expanded(
+                  Flexible(
                     child: _buildContent(),
                   ),
                 ],

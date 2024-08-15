@@ -21,7 +21,7 @@ class _CategoryBarState extends State<CategoryBar> {
     return Row(
       children: category.map((cat) {
         return SizedBox(
-          width: (widthOfScreen / 4) - 10,
+          width: (widthOfScreen / 4) - 4,
           child: InkWell(
             onTap: () {
               setState(() {

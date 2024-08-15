@@ -86,9 +86,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             fontSize: 30,
                           ),
                         ))),
-                    const Size(
-                      h: 10,
-                    ),
+                    const Size(h: 10),
                     Row(
                       children: [
                         const Icon(
@@ -320,7 +318,7 @@ class _SizeOfTState extends State<SizeOfT> {
       width: 300,
       child: Row(
         children: listOfSize.map((cat) {
-          return Expanded(
+          return Flexible(
             child: InkWell(
               onTap: () {
                 setState(() {
@@ -342,12 +340,10 @@ class _SizeOfTState extends State<SizeOfT> {
                   ),
                   duration: const Duration(milliseconds: 500),
                   child: Center(
-                    child: Expanded(
-                      child: Text(
-                        cat,
-                        style: TextStyle(
-                          color: selectedSize == cat ? Colors.white : black,
-                        ),
+                    child: Text(
+                      cat,
+                      style: TextStyle(
+                        color: selectedSize == cat ? Colors.white : black,
                       ),
                     ),
                   ),
