@@ -119,9 +119,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                     const Size(h: 10),
-                    SizedBox(width: 180, child: ColorSelection(onColorSelected: (isSelected) {
-                      colorSelectedNotifier.value = isSelected;
-                    })),
+                    SizedBox(
+                        width: 180,
+                        child: ColorSelection(onColorSelected: (isSelected) {
+                          colorSelectedNotifier.value = isSelected;
+                        })),
                     const Size(h: 12),
                     const Text(
                       'Select Size',
@@ -377,7 +379,11 @@ class AddToCartButton extends StatefulWidget {
   final List listOfDetails;
   final int quantity;
 
-  const AddToCartButton({super.key, required this.ifcolorSelected, required this.listOfDetails, required this.quantity});
+  const AddToCartButton(
+      {super.key,
+      required this.ifcolorSelected,
+      required this.listOfDetails,
+      required this.quantity});
 
   @override
   _AddToCartButtonState createState() => _AddToCartButtonState();
@@ -388,6 +394,8 @@ class _AddToCartButtonState extends State<AddToCartButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        colorselected = -1;
+        ifcolorSelected = false;
         if (!widget.ifcolorSelected) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Select Color')),
