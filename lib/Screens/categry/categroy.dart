@@ -48,14 +48,12 @@ class _CategoryState extends State<Category> {
                         ),
                         duration: const Duration(milliseconds: 500),
                         child: Center(
-                          child: Expanded(
-                            child: Text(
-                              cat,
-                              style: TextStyle(
-                                color: selectedCategoryLevel2 == cat
-                                    ? Colors.white
-                                    : black,
-                              ),
+                          child: Text(
+                            cat,
+                            style: TextStyle(
+                              color: selectedCategoryLevel2 == cat
+                                  ? Colors.white
+                                  : black,
                             ),
                           ),
                         ),
