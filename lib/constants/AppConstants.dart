@@ -26,11 +26,11 @@ String selectedCategoryLevel2 = 'Electronics';
 String dropdownValue = '';
 bool sortState = true;
 int quantity = 1;
-
+int colorselected = -1; // No color selected by default
+bool ifcolorSelected = false;
 
 String? getedName;
 String? getedPassword;
-
 
 //!=================== fun ========================
 
@@ -77,17 +77,16 @@ final List<String> listOfSize = [
 final List<String> electronicsandjewelery = ['Electronics', 'Jewelery'];
 
 final List colors = [
-    const Color(0xff51c51c),
-    const Color(0xff7a0808),
-    black,
-    const Color.fromARGB(255, 236, 236, 236),
-    const Color(0xff1510db),
+  const Color(0xff51c51c),
+  const Color(0xff7a0808),
+  black,
+  const Color.fromARGB(255, 236, 236, 236),
+  const Color(0xff1510db),
 
-    // Colors.green,
-    // const Color.fromARGB(255, 214, 89, 67),
-    // Colors.black,
-    // Color.fromARGB(255, 214, 205, 118),
-    // //white,
-    // Color.fromARGB(255, 12, 70, 117),
-  ];
-
+  // Colors.green,
+  // const Color.fromARGB(255, 214, 89, 67),
+  // Colors.black,
+  // Color.fromARGB(255, 214, 205, 118),
+  // //white,
+  // Color.fromARGB(255, 12, 70, 117),
+];

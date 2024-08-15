@@ -34,6 +34,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return randomNumber;
   }
 
+  final ValueNotifier<bool> colorSelectedNotifier = ValueNotifier<bool>(false);
+
+  @override
+  void dispose() {
+    colorSelectedNotifier.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +119,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                     const Size(h: 10),
-                    const SizedBox(width: 180, child: ColorSelection()),
+                    SizedBox(width: 180, child: ColorSelection(onColorSelected: (isSelected) {
+                      colorSelectedNotifier.value = isSelected;
+                    })),
                     const Size(h: 12),
                     const Text(
                       'Select Size',
@@ -148,33 +158,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ],
                     ),
                     const Size(h: 10),
-                    InkWell(
-                      onTap: () {
-                        // todo go to car
+                    ValueListenableBuilder<bool>(
+                      valueListenable: colorSelectedNotifier,
+                      builder: (context, ifcolorSelected, child) {
+                        return AddToCartButton(
+                          ifcolorSelected: ifcolorSelected,
+                          listOfDetails: listOfDetails,
+                          quantity: quantity,
+                        );
                       },
-                      child: Container(
-                        height: 50,
-                        width: double.infinity,
-                        //width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: blue,
-                        ),
-                        child: Center(
-                          child: InkWell(
-                            onTap: () {
-                              addCart(widget.id, quantity);
-                            },
-                            child: const Text(
-                              'add to car',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),
@@ -184,33 +176,21 @@ class _DetailsScreenState extends State<DetailsScreen> {
             }
           },
         ),
-        // child: Column(
-        //   children: [
-        //     Container(
-        //       width: double.infinity,
-        //       decoration: BoxDecoration(
-        //         image: DecorationImage(image: NetworkImage(protected.image)),
-        //         borderRadius: BorderRadius.circular(20),
-        //       ),
-        //     )
-        //   ],
-        // ),
       ),
     );
   }
 }
 
 class ColorSelection extends StatefulWidget {
-  const ColorSelection({super.key});
+  final Function(bool) onColorSelected;
+
+  const ColorSelection({super.key, required this.onColorSelected});
 
   @override
-  // ignore: library_private_types_in_public_api
   _ColorSelectionState createState() => _ColorSelectionState();
 }
 
 class _ColorSelectionState extends State<ColorSelection> {
-  int selectedIndex = -1; // No color selected
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -219,7 +199,8 @@ class _ColorSelectionState extends State<ColorSelection> {
         return GestureDetector(
           onTap: () {
             setState(() {
-              selectedIndex = index;
+              colorselected = index;
+              widget.onColorSelected(true);
             });
           },
           child: Stack(
@@ -233,7 +214,7 @@ class _ColorSelectionState extends State<ColorSelection> {
                   color: colors[index],
                 ),
               ),
-              selectedIndex == index
+              colorselected == index
                   ? Icon(
                       Icons.check,
                       color: index == 3 ? Colors.black : Colors.white,
@@ -387,6 +368,55 @@ class _QuantityState extends State<Quantity> {
         ),
         const Size(w: 10),
       ],
+    );
+  }
+}
+
+class AddToCartButton extends StatefulWidget {
+  final bool ifcolorSelected;
+  final List listOfDetails;
+  final int quantity;
+
+  const AddToCartButton({super.key, required this.ifcolorSelected, required this.listOfDetails, required this.quantity});
+
+  @override
+  _AddToCartButtonState createState() => _AddToCartButtonState();
+}
+
+class _AddToCartButtonState extends State<AddToCartButton> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (!widget.ifcolorSelected) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Select Color')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('added to cart')),
+          );
+          addCart(widget.listOfDetails[0].id!, widget.quantity);
+        }
+      },
+      child: AnimatedContainer(
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: widget.ifcolorSelected ? blue : Colors.grey,
+        ),
+        duration: const Duration(milliseconds: 500),
+        child: const Center(
+          child: Text(
+            'add to car',
+            style: TextStyle(
+              fontSize: 20,
+              color: white,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -26,7 +26,7 @@ class _CategoryState extends State<Category> {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               children: electronicsandjewelery.map((cat) {
-                return Expanded(
+                return Flexible(
                   child: InkWell(
                     onTap: () {
                       setState(() {
