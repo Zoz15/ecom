@@ -15,19 +15,14 @@ Modern Flutter e‑commerce demo app powered by the Fake Store API. Browse produ
 
 ### 📱 Screenshots
 
-<div>
-
-![Home](Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.09.50.png)
-
-![Categories](Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.10.23.png)
-
-![Details](Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.10.31.png)
-
-![Cart](Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.11.10.png)
-
-![Auth/Profile](Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.11.22.png)
-
-</div>
+<p align="center">
+  <img src="Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.09.50.png" alt="Home" width="19%" />
+  <img src="Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.10.23.png" alt="Categories" width="19%" />
+  <img src="Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.10.31.png" alt="Details" width="19%" />
+  <img src="Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.11.10.png" alt="Cart" width="19%" />
+  <img src="Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.11.22.png" alt="Auth/Profile" width="19%" />
+  
+</p>
 
 ### 🧱 Tech stack
 
