@@ -3,6 +3,7 @@
 Modern Flutter e‑commerce demo app powered by the Fake Store API. Browse products, filter by categories, view rich product details, manage cart, and try basic auth flows (sign in / sign up) with simple local persistence.
 
 ### ✨ Features
+
 - **Product listing**: Grid of products with images, price, and title.
 - **Categories**: All, Men, Women, and Electronics/Jewelery filters.
 - **Sort/Desc**: Toggle to view descending sorted items.
@@ -13,6 +14,7 @@ Modern Flutter e‑commerce demo app powered by the Fake Store API. Browse produ
 - **Theming & icons**: Custom colors, fonts, and `iconsax` icons.
 
 ### 📱 Screenshots
+
 <div>
 
 ![Home](Simulator%20Screenshot%20-%20iPhone%2016%20Plus%20-%202025-08-19%20at%2019.09.50.png)
@@ -28,6 +30,7 @@ Modern Flutter e‑commerce demo app powered by the Fake Store API. Browse produ
 </div>
 
 ### 🧱 Tech stack
+
 - **Flutter**: SDK constraint `>=3.4.4 <4.0.0`
 - **HTTP**: `http` for REST calls
 - **Storage**: `shared_preferences`
@@ -35,6 +38,7 @@ Modern Flutter e‑commerce demo app powered by the Fake Store API. Browse produ
 - **Linting**: `flutter_lints`
 
 ### 🌐 API
+
 - **Data source**: [Fake Store API](https://fakestoreapi.com)
 - **Endpoints used**:
   - `GET /products` – all products
@@ -49,14 +53,18 @@ Modern Flutter e‑commerce demo app powered by the Fake Store API. Browse produ
   - `POST /carts` – add to cart
 
 ### 🚀 Getting started
+
 1. **Prerequisites**
    - Flutter SDK (3.4.x recommended)
    - Xcode (for iOS) / Android Studio (for Android)
 2. **Install dependencies**
+
 ```bash
 flutter pub get
 ```
+
 3. **Run**
+
 ```bash
 # iOS (simulator)
 flutter run -d ios
@@ -69,6 +77,7 @@ flutter run -d chrome
 ```
 
 ### 📂 Project structure (key parts)
+
 ```text
 lib/
   main.dart                        # App entry, bottom navigation
@@ -87,19 +96,22 @@ assets/
 ```
 
 ### ⚙️ Configuration
+
 - **Fonts**: Declared in `pubspec.yaml` under `fonts`.
 - **Assets**: Image assets registered under `assets/image/`.
 - **Launcher icon**: Managed via `flutter_launcher_icons` using `assets/icon/icon.jpeg`.
 
 ### 🧪 Notes & limitations
+
 - This app is for demo/learning; auth and user flows are simplified.
 - API responses and images come from the public Fake Store API and may change.
 - Basic state is stored in memory with minimal persistence via `shared_preferences`.
 
 ### 🙌 Credits
+
 - Data: [Fake Store API](https://fakestoreapi.com)
 - Design/dev: Axon
 
 ### 📝 License
-No license file provided. Add a license if you plan to distribute.
 
+No license file provided. Add a license if you plan to distribute.
